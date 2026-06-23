@@ -1,5 +1,7 @@
 import streamlit as st
-from mapping import translate_code
+import sys
+import io
+from mapping import translate_code, burmese_to_python
 
 st.title("MyanmarCode (Python Converter)")
 
@@ -18,8 +20,6 @@ if st.button("Run"):
         # ၃။ Code ကို တကယ် Run မယ်
         st.subheader("ရလဒ်:")
         # ရလဒ်ကို ဖမ်းယူရန်
-        import sys
-        import io
         old_stdout = sys.stdout
         sys.stdout = mystdout = io.StringIO()
         
@@ -33,6 +33,5 @@ if st.button("Run"):
 
 # ဘေးမှာ Cheat Sheet ပြပေးမယ်
 st.sidebar.title("ကူညီမည့် စာရင်း (Cheat Sheet)")
-from mapping import burmese_to_python
 for burmese, python in burmese_to_python.items():
     st.sidebar.write(f"**{burmese}** = `{python}`")
