@@ -13,7 +13,10 @@ def translate_code(myanmar_code):
         translated = translated.replace(burmese, python)
         
     # Python မှာ print( ... ) ဆိုတဲ့ ပုံစံဖြစ်အောင် အဆုံးမှာ ')' ကို အလိုအလျောက်ဖြည့်ပေးခြင်း
-    if "print(" in translated and not translated.strip().endswith(")"):
-        translated = translated + ")"
-        
+    # အကယ်၍ 'print(' ပါပြီးသားဆိုရင် နောက်ထပ် ')' မထည့်တော့ဘဲ အဆင်ပြေအောင် စစ်ဆေးပေးခြင်း
+    if "print(" in translated:
+        # အကယ်၍ အဆုံးမှာ ')' မပါမှသာ ထည့်ပေးရန်
+        if not translated.strip().endswith(")"):
+            translated = translated + ")"
+            
     return translated
