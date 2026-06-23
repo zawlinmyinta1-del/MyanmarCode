@@ -16,7 +16,7 @@ def translate_code(myanmar_code):
     for burmese, python in burmese_to_python.items():
         translated = translated.replace(burmese, python)
     
-    # print အတွက် bracket ပိတ်ပေးခြင်း
+    # print အတွက် Bracket ပိတ်ပေးခြင်း (Logic အသစ်)
     if "print(" in translated and not translated.strip().endswith(")"):
         translated = translated + ")"
         
