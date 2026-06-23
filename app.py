@@ -1,30 +1,14 @@
-import streamlit as st
-import sys
-import io
-from mapping import translate_code
-
-st.title("MyanmarCode (Python Converter)")
-
-user_input = st.text_area("ဒီမှာ မြန်မာလို Code ရိုက်ပါ", height=150)
-
-if st.button("Run"):
-    try:
-        # ဘာသာပြန်ခြင်း
-        python_code = translate_code(user_input)
-        st.write("ပြောင်းလဲလိုက်သော Python Code:")
-        st.code(python_code, language='python')
-        
-        # ရလဒ်ကို အမှန်တကယ် Run ခြင်း
-        st.write("ရလဒ်:")
-        
-        # Output ကို ဖမ်းယူရန်
-        old_stdout = sys.stdout
-        sys.stdout = mystdout = io.StringIO()
-        
+# app.py ၏ အဓိကအပိုင်းကို ဤသို့ပြင်ပါ
+try:
+    python_code = translate_code(user_input)
+    # print ရလဒ်ကို ဖမ်းယူရန်
+    import io
+    from contextlib import redirect_stdout
+    
+    f = io.StringIO()
+    with redirect_stdout(f):
         exec(python_code)
-        
-        sys.stdout = old_stdout
-        st.success(mystdout.getvalue())
-        
-    except Exception as e:
-        st.error(f"အမှားအယွင်းရှိသည်: {e}")
+    out = f.getvalue()
+    st.success(out)
+except Exception as e:
+    st.error(f"Error: {e}")
