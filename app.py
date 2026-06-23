@@ -19,14 +19,15 @@ if st.button("Run"):
         
         # ၃။ Code ကို တကယ် Run မယ်
         st.subheader("ရလဒ်:")
-        # ရလဒ်ကို ဖမ်းယူရန်
+        
+        # ရလဒ်ကို ဖမ်းယူရန် (Redirect stdout)
         old_stdout = sys.stdout
         sys.stdout = mystdout = io.StringIO()
         
         exec(python_code)
         
         sys.stdout = old_stdout
-        st.write(mystdout.getvalue()) # ရလဒ်ကို Screen ပေါ် ပြမယ်
+        st.write(mystdout.getvalue()) # ရလဒ်ကို Screen ပေါ် ပြပေးမယ်
         
     except Exception as e:
         st.error(f"အမှားအယွင်းရှိသည်: {e}")
