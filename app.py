@@ -5,7 +5,7 @@ from mapping import translate_code, burmese_to_python
 
 st.title("MyanmarCode (Python Converter)")
 
-# စာရိုက်ရန်နေရာ
+# အသုံးပြုသူအတွက် စာရိုက်ရန်နေရာ
 user_input = st.text_area("ဒီမှာ မြန်မာလို Code ရိုက်ပါ (ဥပမာ - ထုတ် : 'မင်္ဂလာပါ')", height=200)
 
 if st.button("Run"):
@@ -20,7 +20,7 @@ if st.button("Run"):
         # ၃။ ရလဒ်ကို အမှန်တကယ် Run ခြင်း
         st.subheader("ရလဒ်:")
         
-        # ရလဒ်ကို ဖမ်းယူရန်
+        # ရလဒ်ကို ဖမ်းယူရန် (Redirect stdout)
         old_stdout = sys.stdout
         sys.stdout = mystdout = io.StringIO()
         
