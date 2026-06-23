@@ -1,4 +1,4 @@
-# MyanmarCode မှ Python သို့ ပြောင်းလဲပေးမည့် အဘိဓာန်
+# မြန်မာမှ Python သို့ ပြောင်းလဲပေးမည့် အဘိဓာန်
 burmese_to_python = {
     "ထုတ် :": "print(",
     "ရိုက်သည်": "input",
@@ -12,12 +12,11 @@ burmese_to_python = {
 
 def translate_code(myanmar_code):
     translated = myanmar_code
-    
-    # ၁။ စကားလုံးတွေကို အစားထိုးမယ်
+    # စကားလုံးတွေကို အစားထိုးမယ်
     for burmese, python in burmese_to_python.items():
         translated = translated.replace(burmese, python)
     
-    # ၂။ အကယ်၍ 'print(' နဲ့ စခဲ့ရင် နောက်ဆုံးမှာ ')' ကို ထည့်ပေးမယ်
+    # print အတွက် bracket ပိတ်ပေးခြင်း
     if "print(" in translated and not translated.strip().endswith(")"):
         translated = translated + ")"
         
