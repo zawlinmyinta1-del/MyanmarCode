@@ -12,11 +12,12 @@ burmese_to_python = {
 
 def translate_code(myanmar_code):
     translated = myanmar_code
-    # စကားလုံးတွေကို အစားထိုးမယ်
+    
+    # ၁။ စကားလုံးတွေကို အစားထိုးမယ်
     for burmese, python in burmese_to_python.items():
         translated = translated.replace(burmese, python)
     
-    # print အတွက် Bracket ပိတ်ပေးခြင်း (Logic အသစ်)
+    # ၂။ 'print(' နဲ့ စခဲ့ရင် နောက်ဆုံးမှာ ')' ကို ထည့်ပေးမယ် (Syntax အမှန်ဖြစ်အောင်)
     if "print(" in translated and not translated.strip().endswith(")"):
         translated = translated + ")"
         
