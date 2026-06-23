@@ -29,7 +29,3 @@ if st.button("Run"):
         
     except Exception as e:
         st.error(f"Error တက်နေသည်: {e}")
-
-if st.button("Reset Variable များ"):
-    st.session_state.my_globals = {}
-    st.rerun()
