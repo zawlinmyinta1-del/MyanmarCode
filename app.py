@@ -16,6 +16,7 @@ if st.button("Run"):
         
         # ရလဒ်ကို အမှန်တကယ် Run ခြင်း
         st.write("ရလဒ်:")
+        
         # Output ကို ဖမ်းယူရန်
         old_stdout = sys.stdout
         sys.stdout = mystdout = io.StringIO()
@@ -24,5 +25,6 @@ if st.button("Run"):
         
         sys.stdout = old_stdout
         st.success(mystdout.getvalue())
+        
     except Exception as e:
         st.error(f"အမှားအယွင်းရှိသည်: {e}")
