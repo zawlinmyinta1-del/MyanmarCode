@@ -13,10 +13,12 @@ code_input = st.text_area("ဒီမှာ Code ရိုက်ပါ", height=2
 if st.button("Run"):
     try:
         translated_code = translate_code(code_input)
+        # Output ကို ဖမ်းယူခြင်း
         old_stdout = sys.stdout
         sys.stdout = mystdout = io.StringIO()
         exec(translated_code, st.session_state.my_globals)
         sys.stdout = old_stdout
+        
         st.success("ရလဒ်:")
         st.write(mystdout.getvalue())
     except Exception as e:
