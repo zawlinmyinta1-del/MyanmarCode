@@ -1,15 +1,20 @@
 import streamlit as st
 from mapping import translate_code
 
-if 'my_vars' not in st.session_state:
-    st.session_state.my_vars = {}
+st.title("MyanmarCode Compiler")
 
-code_input = st.text_area("Code ရိုက်ပါ")
+# Variable တွေကို သိမ်းထားမယ့်နေရာ
+if 'variables' not in st.session_state:
+    st.session_state.variables = {}
+
+code_input = st.text_area("ဒီမှာ Code ရိုက်ပါ")
+
 if st.button("Run"):
     try:
         translated = translate_code(code_input)
-        # exec လုပ်တဲ့အခါ my_vars ကို သုံးပါမယ်
-        exec(translated, {}, st.session_state.my_vars)
-        st.write(st.session_state.my_vars)
+        # တွက်ချက်ခြင်း
+        exec(translated, {}, st.session_state.variables)
+        st.success("ရလဒ်:")
+        st.write(st.session_state.variables)
     except Exception as e:
         st.error(f"အမှား - {e}")
