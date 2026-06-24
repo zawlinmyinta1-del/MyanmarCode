@@ -1,25 +1,22 @@
 import streamlit as st
-import sys
-import io
 from mapping import translate_code
-
-# Variable များ မှတ်သားရန်
-if 'my_globals' not in st.session_state:
-    st.session_state.my_globals = {}
 
 st.title("MyanmarCode Compiler")
 code_input = st.text_area("ဒီမှာ Code ရိုက်ပါ", height=200)
 
 if st.button("Run"):
     try:
+        # ဘာသာပြန်ခြင်း
         translated_code = translate_code(code_input)
-        # Output ကို ဖမ်းယူခြင်း
-        old_stdout = sys.stdout
-        sys.stdout = mystdout = io.StringIO()
-        exec(translated_code, st.session_state.my_globals)
-        sys.stdout = old_stdout
         
-        st.success("ရလဒ်:")
-        st.write(mystdout.getvalue())
+        # ရလဒ်ထုတ်ပြခြင်း
+        st.write("Compiler ရလဒ်:")
+        exec(translated_code)
+        
+    except SyntaxError:
+        st.error("အမှား - ဆရာ့ Code ရိုက်ချက်မှာ စာလုံးပေါင်း (သို့) Syntax မှားနေပါတယ်။")
+    except NameError:
+        st.error("အမှား - ဆရာ အသုံးပြုထားတဲ့ Variable ကို မသတ်မှတ်ရသေးပါဘူး။")
     except Exception as e:
-        st.error(f"Error တက်နေသည်: {e}")
+        # အခြားမမျှော်လင့်ထားတဲ့ အမှားများအတွက်
+        st.error(f"အမှား - {e}")
