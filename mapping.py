@@ -7,22 +7,18 @@ def translate_code(myanmar_code):
     for b, e in num_map.items():
         translated = translated.replace(b, e)
         
-    # Mapping အသစ် (အမှားမရှိအောင် သေချာပြင်ထားသည်)
-    mapping = {
-        "ထုတ် :": "print(",
-        "ဖြစ်သည်": "=",
-        "အကယ်၍": "if",
-        "မဟုတ်လျှင်": "else:",
-        "loop ": "for i in range(" 
-    }
+    # Keyword များ ပြောင်းလဲခြင်း
+    translated = translated.replace("ထုတ် :", "print(")
+    translated = translated.replace("ဖြစ်သည်", "=")
     
-    for burmese, python in mapping.items():
-        translated = translated.replace(burmese, python)
-        
-    # Loop အတွက် နောက်ဆုံးပိတ် ) နဲ့ : ကို ထည့်ပေးခြင်း
-    if "for i in range(" in translated:
-        # ဥပမာ - loop 5: ကို for i in range(5): ဖြစ်အောင် လုပ်ခြင်း
-        if ":" not in translated:
-            translated = translated.replace("range(", "range(").replace("):", "") + "):"
+    # Loop အတွက် အထူးပြင်ဆင်ချက်
+    if "loop" in translated:
+        # loop 5: ကို for i in range(5): ဖြစ်အောင် ပြောင်းခြင်း
+        import re
+        translated = re.sub(r'loop (\d+):', r'for i in range(\1):', translated)
+            
+    # ပိတ်စရာကျန်တဲ့ ) များကို ပိတ်ပေးခြင်း
+    if "print(" in translated and not translated.strip().endswith(")"):
+        translated = translated + ")"
             
     return translated
