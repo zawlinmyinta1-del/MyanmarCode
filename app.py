@@ -3,14 +3,17 @@ from mapping import translate_code
 
 st.title("MyanmarCode Compiler")
 
-# Variable များ သိမ်းဆည်းရန်
+# Variable တွေကို သိမ်းထားဖို့အတွက်
 if 'vars' not in st.session_state:
     st.session_state.vars = {}
 
-code = st.text_area("Code ရိုက်ပါ")
+code_input = st.text_area("Code ရိုက်ပါ (ဥပမာ - ထုတ် : 'Hello')")
+
 if st.button("Run"):
     try:
-        py_code = translate_code(code)
+        # ဘာသာပြန်ခြင်း
+        py_code = translate_code(code_input)
+        # အလုပ်လုပ်ခြင်း
         exec(py_code, {}, st.session_state.vars)
         st.success("အောင်မြင်သည်!")
         st.write(st.session_state.vars)
