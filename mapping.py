@@ -7,7 +7,7 @@ def translate_code(myanmar_code):
     for b, e in num_map.items():
         translated = translated.replace(b, e)
         
-    # Keyword Mapping ထပ်ဖြည့်ခြင်း
+    # Keyword Mapping
     mapping = {
         "ထုတ် :": "print(",
         "ဖြစ်သည်": "=",
@@ -18,4 +18,8 @@ def translate_code(myanmar_code):
     for burmese, python in mapping.items():
         translated = translated.replace(burmese, python)
         
+    # print အတွက် ) ပိတ်ပေးခြင်း
+    if "print(" in translated and not translated.strip().endswith(")"):
+        translated = translated + ")"
+            
     return translated
