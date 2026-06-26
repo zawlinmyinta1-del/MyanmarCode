@@ -1,19 +1,19 @@
-from config import MY_DICT
 import io
 from contextlib import redirect_stdout
 
-def run_myanmar_code(code_text):
-    processed_code = code_text
-    # မြန်မာစကားလုံးတွေကို Python စကားလုံးအဖြစ် အစားထိုးခြင်း
-    for burmese, python_key in MY_DICT.items():
-        processed_code = processed_code.replace(burmese, python_key)
+def execute_mc(code_input):
+    # ဤနေရာတွင် မြန်မာစကားလုံးများကို Python ကုဒ်အဖြစ် ဘာသာပြန်ခြင်း (Mapping)
+    translated_code = code_input.replace("အကယ်၍", "if")
+    translated_code = translated_code.replace("ပြီးတော့", ":") # ဥပမာ - အကယ်၍ 5 > 3 ပြီးတော့
+    translated_code = translated_code.replace("ပြ", "print")
     
+    # ရလဒ်ကို ဖမ်းယူရန်အတွက်
     f = io.StringIO()
     with redirect_stdout(f):
         try:
-            # အလုပ်လုပ်တဲ့အပိုင်း (Exec)
-            exec(processed_code)
+            # ဘာသာပြန်ထားသော ကုဒ်ကို Run ခြင်း
+            exec(translated_code)
         except Exception as e:
-            print(f"အမှားရှိနေပါတယ် : {e}")
+            print(f"Error တက်နေပါတယ်: {e}")
             
     return f.getvalue()

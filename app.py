@@ -1,10 +1,9 @@
-# app.py ဖိုင်ရဲ့ အပေါ်ဆုံးမှာ ဒီလိုရေးပါ
 import streamlit as st
-from config import MY_DICT
-from my_parser import run_myanmar_code  # <--- ဒီစာကြောင်းလေး လိုနေတာပါ
+from mapping import translate_code
 
-# ကျန်တဲ့ code တွေ...
+st.title("MyanmarCode Compiler")
 
+<<<<<<< HEAD
 st.sidebar.title("ကူညီမည့် စာရင်း (Cheat Sheet)")
 for burmese, python_key in MY_DICT.items():
     st.sidebar.write(f"**{burmese}** = `{python_key}`")
@@ -15,3 +14,18 @@ if st.button("Run လုပ်မည်"):
     result = run_myanmar_code(code_text)
     st.subheader("ရလဒ်:")
     st.text(result) # Code ပုံစံနဲ့ ပြပေးတာက ပိုကြည့်ကောင်းပါတယ်
+=======
+# Variable များ သိမ်းဆည်းရန်
+if 'vars' not in st.session_state:
+    st.session_state.vars = {}
+
+code = st.text_area("Code ရိုက်ပါ")
+if st.button("Run"):
+    try:
+        py_code = translate_code(code)
+        exec(py_code, {}, st.session_state.vars)
+        st.success("အောင်မြင်သည်!")
+        st.write(st.session_state.vars)
+    except Exception as e:
+        st.error(f"အမှား - {e}")
+>>>>>>> d166621a50527ff7db25f9c4058f9e30e4262faf
